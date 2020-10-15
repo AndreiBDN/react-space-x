@@ -13,13 +13,13 @@ import FetchData from './service/fetch-data';
 class App extends Component {
 
   fetchData = new FetchData();
-  links = [];
+
 
   state = {
     rocket: "Falcon 1",
     rocketFeatures: null,
     rocketNames : [],
-    companyLinks: [], 
+    company: null,
   }
 
   updateRocket(){
@@ -38,13 +38,19 @@ class App extends Component {
     this.setState({rocket}, this.updateRocket)
   }
   
+  getCompanyInfo(){
+    this.fetchData.getCompany()
+    .then(company => {this.setState({company})})
+    
+  }
 
   componentDidMount(){
     this.updateRocket();
-    // this.getCompanyInfo();
+    this.getCompanyInfo();
   }
 
   render() {
+    
     return (
       <>
       <Header
@@ -55,7 +61,7 @@ class App extends Component {
         rocketFeatures={this.state.rocketFeatures}
       />
       <Footer 
-      
+      company={this.state.company}
       />
   
       </>
