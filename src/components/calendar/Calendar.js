@@ -1,7 +1,7 @@
 import React from 'react';
 import './calendar.css';
 
-const calendar = () => (
+const Calendar = () => (
     <section class="calendar">
 		<div class="container">
 			<ul class="calendar-list">
@@ -71,4 +71,4 @@ const calendar = () => (
 	</section>
 )
 
-export default calendar;
+export default Calendar;

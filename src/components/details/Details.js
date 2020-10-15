@@ -1,7 +1,7 @@
 import React from 'react';
 import './details.css';
 
-const details = () => (
+const Details = () => (
     <main class="details">
 		<div class="container">
 			<div class="details-row">
@@ -13,11 +13,11 @@ const details = () => (
 				</div>
 			</div>
 			<div>
-				<iframe class="details-youtube" width="560" height="315" src="https://www.youtube.com/embed/dLQ2tZEH6G0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				<iframe title="video" class="details-youtube" width="560" height="315" src="https://www.youtube.com/embed/dLQ2tZEH6G0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			</div>
 		</div>
 		<a href="calendar.html" class="button button-back">go back</a>
 	</main>
 )
 
-export default details;
+export default Details;
