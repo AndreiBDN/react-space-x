@@ -22,6 +22,7 @@ class App extends Component {
     rocketFeatures: null,
     rocketNames : [],
     company: null,
+    launch: null,
   }
 
   updateRocket(){
@@ -46,9 +47,14 @@ class App extends Component {
     
   }
 
+  getLaunchInfo = (launch) =>{
+    this.setState({launch})
+  }
+
   componentDidMount(){
     this.updateRocket();
     this.getCompanyInfo();
+    this.getLaunchInfo();
   }
 
   render() {
@@ -70,11 +76,12 @@ class App extends Component {
 
       <Route exact path='/calendar'>
 
-        <Calendar />
+        <Calendar
+        launchInfo={this.getLaunchInfo} />
       </Route>
 
       <Route exact path='/details'>
-        <Details />
+        {this.state.launch ? <Details launch={this.state.launch} /> : null}
       </Route>
 
       {this.state.company ? <Footer company={this.state.company} /> : null}
