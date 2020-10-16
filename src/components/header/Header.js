@@ -1,24 +1,26 @@
 import React from 'react';
+import {Link, NavLink } from 'react-router-dom';
 import logo from '../../logo.svg';
 import './header.css';
 
 const Header = (props) => (
     <header className="header">
+    <Link to='/'>
     <img
             src={logo}
             alt="Logo Space X"
             className="logo"
     />
+    </Link>
     <nav className="main-nav nav">
         <ul className="list">
             {props.rocketNames.map((item, i)=>(
                  <li key={i} className="item">
-                 <a
-                 onClick={e => {
-                     e.preventDefault();
+                 <Link
+                 onClick={() => {
                      props.changeRocket(item)
                  }}
-                 href="/" className="item-link">{item}</a>
+                 to='/rocket' className="item-link">{item}</Link>
              </li>
             ))}
            
@@ -27,10 +29,10 @@ const Header = (props) => (
     <nav className="secondary-nav">
         <ul className="list">
             <li className="item">
-                <a href="/" className="item-link">Home</a>
+                <NavLink exact to='/' className="item-link">Home</NavLink>
             </li>
             <li className="item">
-                <a href="calendar.html" className="item-link">Calendar</a>
+                <NavLink to='/calendar' className="item-link">Calendar</NavLink>
             </li>
         </ul>
     </nav>

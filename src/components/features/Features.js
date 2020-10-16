@@ -12,25 +12,13 @@ const rocketImg = {
 
 const Features = ({rocketFeatures}) => {
 
-	const rocketName = rocketFeatures ? rocketFeatures.name : null;
-	const rocketHeightMet = rocketFeatures ? rocketFeatures.height.meters : null;
-	const rocketHeightFt = rocketFeatures ? rocketFeatures.height.feet : null;
-	const rocketDiametrMet = rocketFeatures ? rocketFeatures.diameter.meters : null;
-	const rocketDiametrFt = rocketFeatures ? rocketFeatures.diameter.feet : null;
-	const rocketMassKg = rocketFeatures ? rocketFeatures.mass.kg : null;
-	const rocketMassLb = rocketFeatures ? rocketFeatures.mass.lb : null;
-	const rocketPayloadKg = rocketFeatures ? rocketFeatures.payload_weights[0].kg : null;
-	const rocketPayloadLb = rocketFeatures ? rocketFeatures.payload_weights[0].Lb : null;
-	const rocketDescr = rocketFeatures ? rocketFeatures.description : null;
+	const {name, height, diameter, mass, payload_weights: payload, description} = rocketFeatures;
 
-
-
-	
 	return(
 
     <section className="features">
 		<h2 className="features-title">
-		{rocketFeatures ? rocketFeatures.name : null} <br/>Overview
+		{name} <br/>Overview
 		</h2>
 		<div className="overview">
 
@@ -41,26 +29,30 @@ const Features = ({rocketFeatures}) => {
 				<thead>
 					<tr>
 						<td className="table-column">HEIGHT</td>
-						<td className="table-column">{rocketHeightMet} m / {rocketHeightFt} ft</td>
+						<td className="table-column">{height.meter} m / {height.feet} ft</td>
 					</tr>
 					<tr>
 						<td className="table-column">DIAMETER</td>
-						<td className="table-column">{rocketDiametrMet} m /{rocketDiametrFt} ft</td>
+						<td className="table-column">{diameter.meter} m / {diameter.feet} ft</td>
 					</tr>
 					<tr>
 						<td className="table-column">MASS</td>
-						<td className="table-column">{rocketMassKg} kg / {rocketMassLb} lb</td>
+						<td className="table-column">{mass.kg} kg / {mass.lb} lb</td>
 					</tr>
-					<tr>
-						<td className="table-column">PAYLOAD TO LEO</td>
-						<td className="table-column">{rocketPayloadKg} kg / {rocketPayloadLb} lb</td>
-					</tr>
+					{payload.map(item=>{
+						return(
+							<tr key={item.id}>
+								<td className="table-column">PAYLOAD TO {item.id.toUpperCase()}</td>
+								<td className="table-column">{item.kg} kg / {item.lb} lb</td>
+							</tr>
+						)
+					})}
 				</thead>
 			</table>
 			<RellaxWrapper speed={14}>
 			
 			<img
-				src={`img/${rocketImg.hasOwnProperty(rocketName) ? rocketImg[rocketName] : rocketImg.other}.png`}
+				src={`img/${rocketImg.hasOwnProperty(name) ? rocketImg[name] : rocketImg.other}.png`}
 				alt="rocket"
 				className="rocket"
 				
@@ -69,7 +61,7 @@ const Features = ({rocketFeatures}) => {
 			<article>
 				<h3 className="features-subtitle">DESCRIPTION</h3>
 				<p className="features-text">
-				{rocketDescr}
+				{description}
 				</p>
 			</article>
 		</div>
