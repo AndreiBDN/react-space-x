@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './components/Home/Home';
-import Main from './components/main/Main';
 import Features from './components/features/Features';
 import Footer from './components/footer/Footer';
 import Details from './components/details/Details';
@@ -41,7 +40,7 @@ class App extends Component {
     this.setState({rocket}, this.updateRocket)
   }
   
-  getCompanyInfo(){
+  getCompanyInfo(){ 
     this.fetchData.getCompany()
     .then(company => {this.setState({company})})
     
@@ -65,12 +64,14 @@ class App extends Component {
       changeRocket={this.changeRocket}
       rocketNames={this.state.rocketNames} />
 
-      <Route exact path='/'>
-        {this.state.company ? <Home company={this.state.company} /> : null}
-      </Route>
+      <Route 
+      exact 
+      path='/'
+      render={()=>this.state.company ? <Home company={this.state.company} /> : null} />
+
 
       <Route exact path='/rocket'>
-        <Main rocket={this.state.rocket}/>
+        
         {this.state.rocketFeatures ? <Features rocketFeatures={this.state.rocketFeatures} /> : null }
       </Route>
 
@@ -80,9 +81,8 @@ class App extends Component {
         launchInfo={this.getLaunchInfo} />
       </Route>
 
-      <Route exact path='/details'>
-        {this.state.launch ? <Details launch={this.state.launch} /> : null}
-      </Route>
+      <Route exact path='/details/:id' component={Details} />
+       
 
       {this.state.company ? <Footer company={this.state.company} /> : null}
   
